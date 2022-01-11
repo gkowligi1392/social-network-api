@@ -73,7 +73,7 @@ const thoughtController = {
         return res.status(404).json({ message: "User not found" });
       }
 
-      res.json(dbThought);
+      res.json({ message: "Thought Deleted!!" });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Error deleting thought" });
@@ -113,13 +113,13 @@ const thoughtController = {
       const { thoughtId, reactionId } = params;
       const dbThought = await Thought.findOneAndUpdate(
         { _id: thoughtId },
-        { $pull: { reactions: { _id: reactionId } } },
+        { $pull: { reactions: { reactionId: reactionId } } },
         { new: true }
       );
       if (!dbThought) {
         return res.status(404).json({ message: "Thought not found" });
       }
-      res.json(dbThought);
+      res.json({ message: "Reaction Deleted!!" });
     } catch (err) {
       console.log(err);
       res.status(500).json({ message: "Error deleting reaction" });
