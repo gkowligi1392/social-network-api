@@ -80,6 +80,16 @@ const thoughtController = {
             res.status(500).json({ message: "Error deleting thought" });
         }
     },
+    //GET all thoughts
+    async getAllThoughts(req, res) {
+        try {
+            const dbThoughts = await Thought.find({});
+            res.json(dbThoughts);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: "Error getting thoughts" });
+        }
+    },
 };
 
 module.exports = thoughtController;
